@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<title>Lines</title>
+</head>
+<body>
+
+	<article id="lines" class="d-flex h-100">
+		<div class="d-flex flex-column flex-fill h-100">
+			<nav class="form-inline justify-content-sm-end p-2">
+				<div class="alert alert-warning border-warning mr-auto mb-0 p-1" role="alert" data-bind="visible: error, text: error"></div>
+				<label for="columnSeparator" class="mr-sm-2">Column</label>
+				<select id="columnSeparator" class="custom-select mr-sm-4 mb-2 mb-sm-0" data-bind="options: choices.column, optionsText: 'description', optionsValue: 'id', value: separator, disable: processing"></select>
+				<button class="btn btn-outline-secondary mr-2" data-bind="click: clear, disable: processing, shortcut: 'mod+l'" title="Clear (Ctrl+L)">Clear</button>
+				<button class="btn btn-info mr-2" data-bind="click: menu, disable: processing, shortcut: 'mod+m'" title="More (Ctrl+M)"><span data-bind="visible: menuOpen">Less</span><span data-bind="visible: !menuOpen">More</span></button>
+				<button class="btn btn-primary" data-bind="click: process, disable: processing, shortcut: 'mod+r'" title="Run (Ctrl+R)">Run</button>
+			</nav>
+			<section class="flex-fill d-flex flex-column text-section">
+				<h1>Data</h1>
+				<div class="toolbar">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="hasHeaders" data-bind="checked: hasHeaders">
+						<label class="form-check-label" for="hasHeaders">Has headers?</label>
+					</div>
+					<a href="#" data-bind="shortcut: 'mod+o', click: openData" title="Open a file to use as data"><icon data-bind="icon: 'folder-open'" /></a>
+				</div>
+				<textarea id="lines" class="flex-fill mousetrap" data-bind="textInput: lines, hasfocus: linesFocus, disable: processing, dragtarget: open" spellcheck="false" autocomplete="off" tabindex="1"></textarea>
+			</section>
+			<section class="flex-fill d-flex flex-column text-section">
+				<h1>Pattern</h1>
+				<div class="toolbar">
+					<a href="#" data-bind="shortcut: 'mod+shift+o', click: openPattern"><icon data-bind="icon: 'folder-open'" /></a>
+					<a href="#" data-bind="shortcut: 'mod+s', click: savePattern"><icon data-bind="icon: 'floppy-disks'" /></a>
+				</div>
+				<textarea id="pattern" class="flex-fill mousetrap" data-bind="textInput: pattern, hasfocus: patternFocus, disable: processing, dragtarget: open" spellcheck="false" autocomplete="off" tabindex="2"></textarea>
+			</section>
+			<section class="flex-fill d-flex flex-column text-section">
+				<h1>Results</h1>
+				<div class="toolbar">
+					<a href="#" data-bind="shortcut: 'mod+shift+s', click: saveResults"><icon data-bind="icon: 'floppy-disks'" /></a>
+				</div>
+				<textarea id="results" class="flex-fill mousetrap" data-bind="textInput: output, disable: processing" spellcheck="false" autocomplete="off" tabindex="3"></textarea>
+			</section>
+			<form id="openFile" class="d-none">
+				<input id="openFileData" type="file" data-bind="event: { change: open }" /> 
+				<input id="openFilePattern" type="file" data-bind="event: { change: open }" />
+			</form>
+		</div>
+		<div class="sidebar container" data-bind="visible: menuOpen">
+			<section class="sidebar-card shortcuts mt-1">
+				<h1 class="h4">Shortcuts</h1>
+				<ul class="list-unstyled">
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>o</kbd></kbd></div>
+						<div class="col-12 col-md-6">Open Data</div>
+					</li>
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>o</kbd></kbd></div>
+						<div class="col-12 col-md-6">Open Pattern</div>
+					</li>
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>s</kbd></kbd></div>
+						<div class="col-12 col-md-6">Save Pattern</div>
+					</li>
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>s</kbd></kbd></div>
+						<div class="col-12 col-md-6">Save Results</div>
+					</li>
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>r</kbd></kbd></div>
+						<div class="col-12 col-md-6">Run</div>
+					</li>
+					<li class="row">
+						<div class="col-12 col-md-6"><kbd><kbd>ctrl</kbd>+<kbd>l</kbd></kbd></div>
+						<div class="col-12 col-md-6">Clear</div>
+					</li>
+				</ul>
+			</section>
+			<section class="sidebar-card">
+				<h1 class="h4">Sorting</h1>
+				<p>[ columns here ]</p>
+			</section>
+			<section class="sidebar-card">
+				<h1 class="h4">Filter</h1>
+				<p>[ filter interface here ]</p>
+			</section>
+			<section class="sidebar-card variables">
+				<h1 class="h4">Pattern Variables</h1>
+				<p><code>$(0)</code> - return a column based on the <span class="text-info">zero-based index</span>.</p>
+				<p><code>$(name)</code> - return a column based on the <span class="text-info">header name</span>.</p>
+			</section>
+			<section class="sidebar-card functions">
+				<h1 class="h4">Pattern Functions</h1>
+				<p><code>@backtick(:string)</code> - Surround :string with backticks (&grave;:string&grave;).</p>
+				<p><code>@guid()</code> - Create a new GUID.</p>
+				<p><code>@indexOf(:string, :find)</code> - Return the first occuring index of :find in :string. Returns -1 if :find is not found in :string.</p>
+				<p><code>@lastIndexOf(:string, :find)</code> - Return the last occurring index of :find in :string. Returns -1 if :find is not found in :string.</p>
+				<p><code>@lower(:string)</code> - Converts :string to lower case characters.</p>
+				<p><code>@quote(:string)</code> - Surround :string with double quotes (&quot;:string&quot;).</p>
+				<p><code>@random(:min, :max)</code> - Generate a random number between :min and :max (inclusive).</p>
+				<p><code>@replace(:string, :regex, :replacement)</code> - Replace all occurences matched by :regex in :string with :replacement.</p>
+				<p><code>@reverse(:string)</code> - Reverse the character order of :string. (Dream becomes maerD).</p>
+				<p><code>@single(:string)</code> - Surround :string with single quotes (&apos;:string&apos;).</p>
+				<p><code>@slice(:string, :from, [:to])</code> - Return characters from :string starting at index :from. :to is an optional parameter.</p>
+				<p><code>@substring(:string, :from, [:length])</code> - Return characters from :string starting at index :from. :length is an optional parameter.</p>
+				<p><code>@title(:string)</code> - Convert :string to title case.</p>
+				<p><code>@trim(:string)</code> - Remove whitespace surrounding :string.</p>
+				<p><code>@trimLeft(:string)</code> - Remove whitespace from the left hand side of :string.</p>
+				<p><code>@trimRight(:string)</code> - Remove whitespace from the right hand side of :string.</p>
+				<p><code>@upper(:string)</code> - Converts :string to upper case characters.</p>
+			</section>
+		</div>
+	</article>
+
+	<script src="js/index.js"></script>	
+
+</body>
+</html>

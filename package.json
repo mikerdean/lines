@@ -1,0 +1,39 @@
+{
+  "name": "lines",
+  "version": "1.0.0",
+  "description": "A Javascript web front end for parsing structured text into formatted output.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "text",
+    "parsing",
+    "csv",
+    "tabulated",
+    "data",
+    "text",
+    "formatting",
+    "text",
+    "substitution"
+  ],
+  "author": "Mike Dean",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^4.3.1",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-svg-sprite": "^1.5.0",
+    "gulp-uglify": "^3.0.2",
+    "knockout": "^3.5.0",
+    "knockout-secure-binding": "^0.5.5",
+    "mousetrap": "^1.6.3"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
