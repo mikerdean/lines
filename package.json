@@ -20,20 +20,20 @@
   "author": "Mike Dean",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "^4.3.1",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
-    "gulp-clean-css": "^4.0.0",
+    "bootstrap": "^4.6.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulp-svg-sprite": "^1.5.0",
     "gulp-uglify": "^3.0.2",
-    "knockout": "^3.5.0",
+    "knockout": "^3.5.1",
     "knockout-secure-binding": "^0.5.5",
-    "mousetrap": "^1.6.3"
+    "mousetrap": "^1.6.5"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   }
 }
